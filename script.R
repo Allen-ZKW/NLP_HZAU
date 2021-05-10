@@ -1,0 +1,32 @@
+library(NLP)
+library(tm)
+library(wordcloud2)
+setwd("D:\\junior_n\\NLP\\task_2")
+cname <- file.path("D:","junior_n","NLP","task_2","genia")
+docs <- Corpus(DirSource(cname))
+tospace <- content_transformer(function(x,parttern)gsub(parttern," ",x))
+docs <- tm_map(docs,removePunctuation)
+docs <- tm_map(docs,tospace,'/')
+docs <- tm_map(docs,tospace,'@')
+docs <- tm_map(docs,tospace,'\\|')
+docs <- tm_map(docs,tolower)
+docs <- tm_map(docs,removeNumbers)
+docs <- tm_map(docs,removeWords,stopwords("english"))
+docs <- tm_map(docs, stemDocument)
+docs <- tm_map(docs,PlainTextDocument)
+dtm <- DocumentTermMatrix(docs)
+freq <- colSums(as.matrix(dtm))
+ord <- order(freq,decreasing = T)
+test = freq[head(ord,500)]
+d <- data.frame(word = names(test),freq = test)
+write.table(d,"genia_freq.csv",row.names=FALSE,col.names=FALSE,sep=",")
+
+wordcloud2(demoFreq, figPath = figPath, size = 1.5,color = "skyblue")
+wordcloud2(data = d_l)
+letterCloud(demoFreq,word = "GENI",wordSize = 0.33)
+figPath = system.file("D:\\junior_n\\NLP\\task_2\\AGAC\\AGAC.png",package = "wordcloud2")
+
+options("repos" = c(CRAN="https://mirrors.tuna.tsinghua.edu.cn/CRAN/"))#设置清华镜像
+install.packages("jsonlite")    #一定要安装这个包
+library('devtools')
+devtools::install_github("lchiffon/wordcloud2")
