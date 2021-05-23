@@ -1,2 +1,2 @@
-# NLP_HZAU
-A project to record what I learn and what I exercise in this class.
+# Task 6. Recognize Ontology in AGAC corpus by BERT and CRF
+# Reference from Jingbo Xia
