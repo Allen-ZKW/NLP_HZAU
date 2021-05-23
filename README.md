@@ -1,6 +1,6 @@
 # Embedding-experiment-in-BioNLP-course
 
-# reference from Jingbo Xia
+# Reference from Jingbo Xia
 
 ## 1. Data preparation. 
 
